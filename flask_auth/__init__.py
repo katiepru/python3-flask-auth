@@ -1,5 +1,5 @@
-from payroll2python.auth.ldap import LDAP
-from payroll2python.auth.login import LoginForm
+from flask_auth.ldap import LDAP
+from flask_auth.login import LoginForm
 
 class Auth:
 
