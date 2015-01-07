@@ -5,7 +5,6 @@ class LoginForm(Form):
     password = PasswordField('Password', validators=[validators.DataRequired()])
 
     def __init__(self, get_user_func, *args, **kwargs):
-        print("setting up form")
         Form.__init__(self, *args, **kwargs)
         self.user = None
         self.get_user_func = get_user_func
@@ -18,7 +17,6 @@ class LoginForm(Form):
         fields = {}
         for field in self:
             fields[field.name] = field.data
-        print(fields)
 
         (user, e) = self.get_user_func(fields)
 
