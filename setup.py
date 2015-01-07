@@ -14,5 +14,6 @@ setup(name = 'Flask-Auth',
                           'python3-ldap',
                           'WTForms'
                          ],
-      keywords = 'auth flask login ldap'
+      keywords = 'auth flask login ldap',
+      license = "PSF"
      )
