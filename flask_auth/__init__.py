@@ -1,5 +1,6 @@
 from flask_auth.ldap import LDAP
 from flask_auth.login import LoginForm
+from flask_login import login_user
 
 class Auth:
 
@@ -24,13 +25,15 @@ class Auth:
         match. This is done in the order they were specified by the user. First
         one to find a match succeeds"""
 
+        user = None
+
         for method in self.methods:
 
             if method == "local":
                 user = self.query_func(fields)
                 if user is None:
                     continue
-                return (user, None)
+                break
 
             if method == "ldap":
                 ldap_obj = LDAP(self.ldap_config)
@@ -45,27 +48,9 @@ class Auth:
                     user = self.register_func(fields)
                     if user is None:
                         continue
-                return (user, None)
+                    break
 
+        if not user is None:
+            login_user(user)
+            return (user, None)
         return (None, "Invalid credentials")
-
-class User():
-
-    # Flask-Login integration
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        #TODO: Implement blacklist/whitelist here
-        return True
-
-    def is_anonymous(self):
-        return True
-
-    def get_id(self):
-        return unicode(self.netid)
-
-    def __unicode__(self):
-        return unicode(self.netid)
-
-
