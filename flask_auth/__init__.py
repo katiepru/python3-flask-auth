@@ -14,8 +14,8 @@ class Auth:
         self.query_func = query_func
         self.register_func = register_func
 
-    def login(self, request, showLogin, nextAction):
-        form = LoginForm(self.getUserFunc, request.form)
+    def login(self, request, loginform_class, showLogin, nextAction):
+        form = loginform_class(self.getUserFunc, request.form)
         if request.method == 'POST' and form.validate():
             return nextAction(form.user)
         return showLogin(form=form)

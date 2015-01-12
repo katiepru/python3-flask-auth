@@ -1,8 +1,6 @@
 from wtforms import Form, TextField, PasswordField, validators
 
 class LoginForm(Form):
-    username = TextField('Netid', validators=[validators.DataRequired()])
-    password = PasswordField('Password', validators=[validators.DataRequired()])
 
     def __init__(self, get_user_func, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
@@ -21,7 +19,7 @@ class LoginForm(Form):
         (user, e) = self.get_user_func(fields)
 
         if e is not None:
-            self.errors['username'] = e
+            self.errors['last_error'] = e
             return False
 
         self.user = user
