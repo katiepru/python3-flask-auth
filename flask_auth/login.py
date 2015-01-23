@@ -6,7 +6,6 @@ class LoginForm(Form):
         Form.__init__(self, *args, **kwargs)
         self.user = None
         self.get_user_func = get_user_func
-        self.errors = {}
 
     def validate(self):
         rv = Form.validate(self)

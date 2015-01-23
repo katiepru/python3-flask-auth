@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name = 'Flask-Auth',
-      version = '0.1',
+      version = '0.4',
       description = 'Flask authentication framework',
       author = 'Kaitlin Poskaitis',
       author_email = 'kposkaitis2011@gmail.com',
