@@ -18,7 +18,7 @@ class Auth:
         form = loginform_class(self.getUserFunc, request.form)
         if request.method == 'POST' and form.validate():
             return nextAction(form.user)
-        return showLogin(form=form)
+        return showLogin(form=form, error=form.errors.get('last_error'))
 
     def getUserFunc(self, fields):
         """Go through each method for authentication and see if we find a
@@ -51,6 +51,8 @@ class Auth:
                     break
 
         if not user is None:
-            login_user(user)
+            active = login_user(user)
+            if not active:
+                return (None, "User is inactive")
             return (user, None)
         return (None, "Invalid credentials")
